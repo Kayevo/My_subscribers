@@ -13,7 +13,7 @@ interface SubscriberDao {
     @Update
     suspend fun update(subscriber: SubscriberEntity)
 
-    @Query("DELETE FROM subscriber WHERE id = :ida")
+    @Query("DELETE FROM subscriber WHERE id = :id")
     public abstract suspend fun delete(id: Long)
 
     @Query("DELETE FROM subscriber")

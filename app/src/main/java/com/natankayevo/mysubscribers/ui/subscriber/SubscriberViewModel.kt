@@ -1,7 +1,45 @@
 package com.natankayevo.mysubscribers.ui.subscriber
 
+import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.natankayevo.mysubscribers.R
+import com.natankayevo.mysubscribers.repository.SubscriberRepository
+import kotlinx.coroutines.launch
 
-class SubscriberViewModel : ViewModel() {
-    // TODO: Implement the ViewModel
+class SubscriberViewModel(
+    private val subscriberRepository: SubscriberRepository
+) : ViewModel() {
+    companion object{
+        private val CLASS_NAME_TAG = SubscriberViewModel::class.java.simpleName
+    }
+
+    private val _subscriberStateEventData = MutableLiveData<SubscriberState>()
+    val subscriberStateEventData: LiveData<SubscriberState>
+        get() = _subscriberStateEventData
+
+    private val _messageEventData = MutableLiveData<Int>()
+    val messageEventData: LiveData<Int>
+    get() = _messageEventData
+
+    fun addSubscriber(name: String, email: String) = viewModelScope.launch {
+        try {
+            val subscriberId = subscriberRepository.insertSubscriber(name, email)
+            if(subscriberId > 0){
+                _subscriberStateEventData.value = SubscriberState.inserted
+                _messageEventData.value = R.string.subscriber_inserted_successfully
+            }else{
+                _messageEventData.value = R.string.subscriber_error_to_insert
+            }
+        }catch (ex: Exception){
+            _messageEventData.value = R.string.subscriber_error_to_insert
+            Log.e(CLASS_NAME_TAG, ex.toString())
+        }
+    }
+
+    sealed class SubscriberState{
+        object inserted: SubscriberState()
+    }
 }
