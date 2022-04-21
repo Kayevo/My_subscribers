@@ -8,6 +8,8 @@ import androidx.room.PrimaryKey
 data class SubscriberEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0,
-    @ColumnInfo(name = "name") val name: String,
-    @ColumnInfo(name = "email") val email: String
+    @ColumnInfo(name = "name")
+    val name: String,
+    @ColumnInfo(name = "email")
+    val email: String
 )

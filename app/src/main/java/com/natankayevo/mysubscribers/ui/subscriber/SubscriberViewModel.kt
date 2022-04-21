@@ -12,6 +12,7 @@ import kotlinx.coroutines.launch
 class SubscriberViewModel(
     private val subscriberRepository: SubscriberRepository
 ) : ViewModel() {
+
     companion object{
         private val CLASS_NAME_TAG = SubscriberViewModel::class.java.simpleName
     }
@@ -28,7 +29,7 @@ class SubscriberViewModel(
         try {
             val subscriberId = subscriberRepository.insertSubscriber(name, email)
             if(subscriberId > 0){
-                _subscriberStateEventData.value = SubscriberState.inserted
+                _subscriberStateEventData.value = SubscriberState.Inserted
                 _messageEventData.value = R.string.subscriber_inserted_successfully
             }else{
                 _messageEventData.value = R.string.subscriber_error_to_insert
@@ -39,7 +40,9 @@ class SubscriberViewModel(
         }
     }
 
+    fun getValueTwo(): Int = 2
+
     sealed class SubscriberState{
-        object inserted: SubscriberState()
+        object Inserted: SubscriberState()
     }
 }

@@ -56,8 +56,6 @@ class SubscriberFragment : Fragment() {
         _binding = null
     }
 
-
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -68,7 +66,7 @@ class SubscriberFragment : Fragment() {
     private fun observeEvents() {
         viewModel.subscriberStateEventData.observe(viewLifecycleOwner) { subscriberSate ->
             when (subscriberSate) {
-                is SubscriberViewModel.SubscriberState.inserted -> {
+                is SubscriberViewModel.SubscriberState.Inserted -> {
                     clearFields()
                     hideKeyboard()
                 }
