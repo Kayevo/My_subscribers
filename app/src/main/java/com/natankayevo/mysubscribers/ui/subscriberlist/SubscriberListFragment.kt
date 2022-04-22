@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.natankayevo.mysubscribers.data.database.entity.SubscriberEntity
 import com.natankayevo.mysubscribers.databinding.SubscriberListFragmentBinding
 
 class SubscriberListFragment : Fragment() {
@@ -29,6 +30,26 @@ class SubscriberListFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private lateinit var viewModel: SubscriberListViewModel
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val subscriberListAdapter = SubscriberListAdapter(
+            listOf(
+                SubscriberEntity(1, "A", "A@A"),
+                SubscriberEntity(2, "B", "B@B")
+            )
+        )
+
+        binding.recyclerSubscribers.run {
+            setHasFixedSize(true)
+            adapter = subscriberListAdapter
+        }
+
+
     }
 
 }

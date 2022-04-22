@@ -11,20 +11,12 @@ import com.natankayevo.mysubscribers.databinding.SubscriberItemBinding
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var binding2: SubscriberItemBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
-
-        //
-        binding2 = SubscriberItemBinding.inflate(layoutInflater)
-        val view2 = binding2.root
-
-        binding2.
-        //
 
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment)
                 as NavHostFragment
@@ -34,7 +26,5 @@ class MainActivity : AppCompatActivity() {
         binding.appToolbar.setupWithNavController(navController, appBarConfiguration)
 
         setContentView(view)
-
-
     }
 }
