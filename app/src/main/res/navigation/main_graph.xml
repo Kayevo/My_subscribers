@@ -8,13 +8,17 @@
     <fragment
         android:id="@+id/subscriberListFragment"
         android:name="com.natankayevo.mysubscribers.ui.subscriberlist.SubscriberListFragment"
-        android:label="subscriber_list_fragment"
-        tools:layout="@layout/subscriber_list_fragment" />
+        android:label="@string/subscriber_list_title"
+        tools:layout="@layout/subscriber_list_fragment" >
+        <action
+            android:id="@+id/action_subscriberListFragment_to_subscriberFragment"
+            app:destination="@id/subscriberFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/subscriberFragment"
         android:name="com.natankayevo.mysubscribers.ui.subscriber.SubscriberFragment"
-        android:label="@string/subscriber_title"
+        android:label="@string/subscriber_sign_up"
         tools:layout="@layout/subscriber_fragment" />
 
 </navigation>

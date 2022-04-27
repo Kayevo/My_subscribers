@@ -5,10 +5,34 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.natankayevo.mysubscribers.data.database.entity.SubscriberEntity
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.RecyclerView
+import com.natankayevo.mysubscribers.R
+import com.natankayevo.mysubscribers.data.database.AppDatabase
+import com.natankayevo.mysubscribers.data.database.dao.SubscriberDao
 import com.natankayevo.mysubscribers.databinding.SubscriberListFragmentBinding
+import com.natankayevo.mysubscribers.extension.navigateWithTransitions
+import com.natankayevo.mysubscribers.repository.DBDataSource
+import com.natankayevo.mysubscribers.repository.SubscriberRepository
 
 class SubscriberListFragment : Fragment() {
+
+    private val viewModel: SubscriberListViewModel by viewModels {
+        object : ViewModelProvider.Factory {
+            override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+
+                val subscriberDao: SubscriberDao =
+                    AppDatabase.getInstance(requireContext()).subscriberDao
+
+                val repository: SubscriberRepository = DBDataSource(subscriberDao)
+
+                return SubscriberListViewModel(repository) as T
+            }
+        }
+    }
 
     /*
         This property is only valid between onCreateView and
@@ -32,24 +56,30 @@ class SubscriberListFragment : Fragment() {
         _binding = null
     }
 
-    private lateinit var viewModel: SubscriberListViewModel
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        val subscriberListAdapter = SubscriberListAdapter(
-            listOf(
-                SubscriberEntity(1, "A", "A@A"),
-                SubscriberEntity(2, "B", "B@B")
-            )
-        )
-
-        binding.recyclerSubscribers.run {
-            setHasFixedSize(true)
-            adapter = subscriberListAdapter
-        }
-
-
+        observeViewModelEvents()
+        setViewListeners()
     }
+
+    private fun observeViewModelEvents() {
+        viewModel.allSubscribersEvent.observe(viewLifecycleOwner) { allSubscribers ->
+            val subscriberListAdapter = SubscriberListAdapter(allSubscribers)
+
+            val subscriberRecyclerView: RecyclerView = binding.recyclerSubscribers
+
+            binding.recyclerSubscribers.run {
+                setHasFixedSize(true)
+                adapter = subscriberListAdapter
+            }
+        }
+    }
+
+    private fun setViewListeners() {
+        binding.fabAddSubscriber.setOnClickListener() {
+            findNavController().navigateWithTransitions(R.id.subscriberFragment)
+        }
+    }
+
 
 }

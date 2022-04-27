@@ -1,11 +1,15 @@
 <resources>
     <string name="app_name">My subscribers</string>
 
-    <!-- Subscriber fragment -->
+    <!-- Subscriber sign up -->
     <string name="subscriber_name_hint">Subscriber\'s name</string>
     <string name="subscriber_email_hint">Subscriber\'s e-mail</string>
     <string name="sign_up_text">Sign up</string>
     <string name="subscriber_title">Subscriber</string>
     <string name="subscriber_inserted_successfully">Subscriber inserted successfully</string>
     <string name="subscriber_error_to_insert">There was an error when inserting subscriber</string>
+    <string name="subscriber_sign_up">Sign up subscriber</string>
+
+    <!-- Subscriber list -->
+    <string name="subscriber_list_title">Subscribers list</string>
 </resources>

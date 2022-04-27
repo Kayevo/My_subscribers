@@ -34,7 +34,7 @@ class SubscriberListAdapter(
 
     // create an inner class with name SubscriberListViewHolder
     // It takes a view argument, in which pass the generated class of subscriber_item.xml
-    inner class SubscriberListViewHolder(val binding: SubscriberItemBinding) :
+    class SubscriberListViewHolder(val binding: SubscriberItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         private val txtViewName: TextView = binding.textSubscriberName

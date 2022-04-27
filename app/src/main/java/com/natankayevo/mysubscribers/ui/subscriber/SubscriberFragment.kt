@@ -97,6 +97,7 @@ class SubscriberFragment : Fragment() {
             val email = binding.inputEmail.text.toString()
 
             viewModel.addSubscriber(name, email)
+            viewModel
         }
     }
 

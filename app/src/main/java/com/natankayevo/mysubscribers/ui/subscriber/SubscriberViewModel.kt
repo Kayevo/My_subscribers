@@ -40,8 +40,6 @@ class SubscriberViewModel(
         }
     }
 
-    fun getValueTwo(): Int = 2
-
     sealed class SubscriberState{
         object Inserted: SubscriberState()
     }
