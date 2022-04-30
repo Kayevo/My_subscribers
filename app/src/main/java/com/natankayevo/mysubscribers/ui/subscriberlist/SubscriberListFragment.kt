@@ -75,6 +75,11 @@ class SubscriberListFragment : Fragment() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.getSubscribers()
+    }
+
     private fun setViewListeners() {
         binding.fabAddSubscriber.setOnClickListener() {
             findNavController().navigateWithTransitions(R.id.subscriberFragment)

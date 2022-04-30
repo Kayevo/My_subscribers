@@ -9,12 +9,14 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.natankayevo.mysubscribers.R
 import com.natankayevo.mysubscribers.data.database.AppDatabase
 import com.natankayevo.mysubscribers.data.database.dao.SubscriberDao
 import com.natankayevo.mysubscribers.databinding.SubscriberFragmentBinding
 import com.natankayevo.mysubscribers.extension.hideKeyboard
+import com.natankayevo.mysubscribers.extension.navigateWithTransitions
 import com.natankayevo.mysubscribers.repository.DBDataSource
 import com.natankayevo.mysubscribers.repository.SubscriberRepository
 
@@ -69,6 +71,8 @@ class SubscriberFragment : Fragment() {
                 is SubscriberViewModel.SubscriberState.Inserted -> {
                     clearFields()
                     hideKeyboard()
+                    requireView().requestFocus()
+                    findNavController().navigateWithTransitions(R.id.subscriberListFragment)
                 }
             }
         }
