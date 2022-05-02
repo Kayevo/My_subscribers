@@ -19,6 +19,12 @@
         android:id="@+id/subscriberFragment"
         android:name="com.natankayevo.mysubscribers.ui.subscriber.SubscriberFragment"
         android:label="@string/subscriber_sign_up"
-        tools:layout="@layout/subscriber_fragment" />
+        tools:layout="@layout/subscriber_fragment" >
+        <argument
+            android:name="subscriberArg"
+            app:argType="com.natankayevo.mysubscribers.data.database.entity.SubscriberEntity"
+            android:defaultValue="@null"
+            app:nullable="true"/>
+    </fragment>
 
 </navigation>

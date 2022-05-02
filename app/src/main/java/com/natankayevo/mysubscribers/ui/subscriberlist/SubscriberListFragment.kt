@@ -64,11 +64,21 @@ class SubscriberListFragment : Fragment() {
 
     private fun observeViewModelEvents() {
         viewModel.allSubscribersEvent.observe(viewLifecycleOwner) { allSubscribers ->
-            val subscriberListAdapter = SubscriberListAdapter(allSubscribers)
 
-            val subscriberRecyclerView: RecyclerView = binding.recyclerSubscribers
+            val subscriberListAdapter = SubscriberListAdapter(allSubscribers).apply {
+                onItemClick = { subscriber ->
+                    val subListDirection = SubscriberListFragmentDirections
+                        .actionSubscriberListFragmentToSubscriberFragment()
+                        .apply {
+                            subscriberArg = subscriber
+                        }
+                    findNavController().navigateWithTransitions(subListDirection)
+                }
+            }
 
-            binding.recyclerSubscribers.run {
+            val subRecyclerView: RecyclerView = binding.recyclerSubscribers
+
+            subRecyclerView.run {
                 setHasFixedSize(true)
                 adapter = subscriberListAdapter
             }
@@ -82,7 +92,7 @@ class SubscriberListFragment : Fragment() {
 
     private fun setViewListeners() {
         binding.fabAddSubscriber.setOnClickListener() {
-            findNavController().navigateWithTransitions(R.id.subscriberFragment)
+            findNavController().navigateWithTransitions(R.id.action_subscriberListFragment_to_subscriberFragment)
         }
     }
 

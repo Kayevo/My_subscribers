@@ -7,8 +7,13 @@
     <string name="sign_up_text">Sign up</string>
     <string name="subscriber_title">Subscriber</string>
     <string name="subscriber_inserted_successfully">Subscriber inserted successfully</string>
-    <string name="subscriber_error_to_insert">There was an error when inserting subscriber</string>
+    <string name="subscriber_error_to_insert">There was an error inserting subscriber</string>
     <string name="subscriber_sign_up">Sign up subscriber</string>
+
+    <!-- Subscriber update -->
+    <string name="subscriber_button_update">Update</string>
+    <string name="subscriber_error_update">There was an error updating subscriber</string>
+    <string name="subscriber_success_update">Subscriber updated successfully</string>
 
     <!-- Subscriber list -->
     <string name="subscriber_list_title">Subscribers list</string>

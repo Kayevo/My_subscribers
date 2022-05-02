@@ -1,6 +1,7 @@
 package com.natankayevo.mysubscribers.extension
 
 import androidx.navigation.NavController
+import androidx.navigation.NavDirections
 import androidx.navigation.NavOptions
 import com.natankayevo.mysubscribers.R
 
@@ -16,4 +17,11 @@ fun NavController.navigateWithTransitions(
     animation: NavOptions = defaultTransitionsOpt
 ){
     this.navigate(destinationId, null, animation)
+}
+
+fun NavController.navigateWithTransitions(
+    destinationId: NavDirections,
+    animation: NavOptions = defaultTransitionsOpt
+){
+    this.navigate(destinationId, animation)
 }

@@ -13,7 +13,7 @@ class SubscriberViewModel(
     private val subscriberRepository: SubscriberRepository
 ) : ViewModel() {
 
-    companion object{
+    companion object {
         private val CLASS_NAME_TAG = SubscriberViewModel::class.java.simpleName
     }
 
@@ -23,24 +23,40 @@ class SubscriberViewModel(
 
     private val _messageEventData = MutableLiveData<Int>()
     val messageEventData: LiveData<Int>
-    get() = _messageEventData
+        get() = _messageEventData
 
     fun addSubscriber(name: String, email: String) = viewModelScope.launch {
         try {
             val subscriberId = subscriberRepository.insertSubscriber(name, email)
-            if(subscriberId > 0){
+            if (subscriberId > 0) {
                 _subscriberStateEventData.value = SubscriberState.Inserted
                 _messageEventData.value = R.string.subscriber_inserted_successfully
-            }else{
+            } else {
                 _messageEventData.value = R.string.subscriber_error_to_insert
             }
-        }catch (ex: Exception){
+        } catch (ex: Exception) {
             _messageEventData.value = R.string.subscriber_error_to_insert
             Log.e(CLASS_NAME_TAG, ex.toString())
         }
     }
 
-    sealed class SubscriberState{
-        object Inserted: SubscriberState()
+    fun updateSubscriber(name: String, email: String, id: Long = 0) = viewModelScope.launch {
+        try {
+            if (id > 0) {
+                subscriberRepository.updateSubscriber(id, name, email)
+                _subscriberStateEventData.value = SubscriberState.Updated
+                _messageEventData.value = R.string.subscriber_success_update
+            } else {
+                _messageEventData.value = R.string.subscriber_error_update
+            }
+        } catch (ex: Exception) {
+            _messageEventData.value = R.string.subscriber_error_update
+            Log.e(CLASS_NAME_TAG, ex.toString())
+        }
+    }
+
+    sealed class SubscriberState {
+        object Inserted : SubscriberState()
+        object Updated : SubscriberState()
     }
 }
