@@ -1,20 +1,25 @@
 <resources>
     <string name="app_name">My subscribers</string>
 
-    <!-- Subscriber sign up -->
+    <!-- Subscriber fragment -->
     <string name="subscriber_name_hint">Subscriber\'s name</string>
     <string name="subscriber_email_hint">Subscriber\'s e-mail</string>
     <string name="sign_up_text">Sign up</string>
     <string name="subscriber_title">Subscriber</string>
+    <!-- Subscriber sign up -->
     <string name="subscriber_inserted_successfully">Subscriber inserted successfully</string>
     <string name="subscriber_error_to_insert">There was an error inserting subscriber</string>
     <string name="subscriber_sign_up">Sign up subscriber</string>
-
     <!-- Subscriber update -->
     <string name="subscriber_button_update">Update</string>
     <string name="subscriber_error_update">There was an error updating subscriber</string>
     <string name="subscriber_success_update">Subscriber updated successfully</string>
+    <!-- Subscriber delete -->
+    <string name="subscriber_button_delete">Delete</string>
+    <string name="subscriber_error_delete">There was an error deleting subscriber</string>
+    <string name="subscriber_success_delete">Subscriber deleted successfully</string>
 
     <!-- Subscriber list -->
     <string name="subscriber_list_title">Subscribers list</string>
+
 </resources>

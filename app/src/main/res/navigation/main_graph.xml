@@ -25,6 +25,9 @@
             app:argType="com.natankayevo.mysubscribers.data.database.entity.SubscriberEntity"
             android:defaultValue="@null"
             app:nullable="true"/>
+        <action
+            android:id="@+id/action_subscriberFragment_to_subscriberListFragment"
+            app:destination="@id/subscriberListFragment" />
     </fragment>
 
 </navigation>

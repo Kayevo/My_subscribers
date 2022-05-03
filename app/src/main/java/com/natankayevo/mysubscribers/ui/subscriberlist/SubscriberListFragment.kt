@@ -76,9 +76,7 @@ class SubscriberListFragment : Fragment() {
                 }
             }
 
-            val subRecyclerView: RecyclerView = binding.recyclerSubscribers
-
-            subRecyclerView.run {
+            binding.recyclerSubscribers.run {
                 setHasFixedSize(true)
                 adapter = subscriberListAdapter
             }
@@ -92,7 +90,8 @@ class SubscriberListFragment : Fragment() {
 
     private fun setViewListeners() {
         binding.fabAddSubscriber.setOnClickListener() {
-            findNavController().navigateWithTransitions(R.id.action_subscriberListFragment_to_subscriberFragment)
+            val actionFromListToSignUp = R.id.action_subscriberListFragment_to_subscriberFragment
+            findNavController().navigateWithTransitions(actionFromListToSignUp)
         }
     }
 

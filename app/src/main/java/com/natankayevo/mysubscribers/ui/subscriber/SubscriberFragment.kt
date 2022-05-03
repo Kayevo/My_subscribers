@@ -66,32 +66,36 @@ class SubscriberFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         args.subscriberArg?.let { subscriber ->
-            setSubUpdate(subscriber)
+            setUpdateScene(subscriber)
+            setDeleteScene()
         }
 
         observeEvents()
         setListeners()
     }
 
-    private fun setSubUpdate(subscriber: SubscriberEntity) {
+    private fun setUpdateScene(subscriber: SubscriberEntity) {
         binding.sendButton.text = getString(R.string.subscriber_button_update)
         binding.inputName.setText(subscriber.name)
         binding.inputEmail.setText(subscriber.email)
     }
 
+    private fun setDeleteScene() {
+        binding.deleteButton.visibility = View.VISIBLE
+    }
+
     private fun observeEvents() {
+        val actionFromSignUpToList = R.id.action_subscriberFragment_to_subscriberListFragment
+
         viewModel.subscriberStateEventData.observe(viewLifecycleOwner) { subscriberSate ->
             when (subscriberSate) {
-                is SubscriberViewModel.SubscriberState.Inserted -> {
+                is SubscriberViewModel.SubscriberState.Inserted,
+                is SubscriberViewModel.SubscriberState.Updated,
+                is SubscriberViewModel.SubscriberState.Deleted -> {
                     clearFields()
                     hideKeyboard()
                     requireView().requestFocus()
-                    findNavController().navigateWithTransitions(R.id.subscriberListFragment)
-                }
-                is SubscriberViewModel.SubscriberState.Updated -> {
-                    clearFields()
-                    hideKeyboard()
-                    findNavController().navigateWithTransitions(R.id.subscriberListFragment)
+                    findNavController().navigateWithTransitions(actionFromSignUpToList)
                 }
             }
         }
@@ -121,13 +125,13 @@ class SubscriberFragment : Fragment() {
 
             if (binding.sendButton.text.toString() == getString(R.string.sign_up_text)) {
                 viewModel.addSubscriber(name, email)
-            }else{
+            } else {
                 viewModel.updateSubscriber(name, email, args.subscriberArg?.id ?: 0)
             }
+        }
 
-
-
-            viewModel
+        binding.deleteButton.setOnClickListener() {
+            viewModel.deleteSubscriber(args.subscriberArg?.id ?: 0)
         }
     }
 
